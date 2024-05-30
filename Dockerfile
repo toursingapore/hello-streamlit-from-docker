@@ -19,9 +19,11 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Download SAM Model in Docker Hub
-RUN mkdir /app/sam_images
-RUN curl -o /app/sam_images/sam_vit_l_0b3195.pth https://dl.fbaipublicfiles.com/segment_anything/sam_vit_l_0b3195.pth
+# Download SAM Model in Docker Hub if it doesn't exist
+RUN mkdir -p /app/sam_images
+RUN if [ ! -f /app/sam_images/sam_vit_l_0b3195.pth ]; then \
+    curl -o /app/sam_images/sam_vit_l_0b3195.pth https://dl.fbaipublicfiles.com/segment_anything/sam_vit_l_0b3195.pth; \
+    fi
 RUN apt install libgl1-mesa-glx -y
 
 # Copy the rest of the application code into the container
