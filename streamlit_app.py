@@ -1,7 +1,6 @@
 import streamlit as st
 import torch
 from segment_anything import sam_model_registry
-from app.routers import inference
 
 def main():
     st.title("Hello Streamlit App")
