@@ -11,7 +11,7 @@ def main():
         st.write(f"Hello, {name}! Nice to meet you!")
 
     import cv2
-    st.write(cv2.__version__)
+    st.write(f"opencv version {cv2.__version__}")
 
 if __name__ == "__main__":
     main()
