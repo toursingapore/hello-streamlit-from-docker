@@ -1,7 +1,7 @@
 # Use the official Python image from the Docker Hub
 FROM python:3.9
 
-# Set the working directory
+# Set the working directory in Docker Hub
 WORKDIR /app
 
 # Copy the requirements file into the container
@@ -18,6 +18,11 @@ RUN apt-get update && \
     xargs -a /app/packages.txt apt-get install -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+# Download SAM Model in Docker Hub
+RUN mkdir /app/sam_images
+RUN curl -o /app/sam_images/sam_vit_l_0b3195.pth https://dl.fbaipublicfiles.com/segment_anything/sam_vit_l_0b3195.pth
+RUN apt install libgl1-mesa-glx -y
 
 # Copy the rest of the application code into the container
 COPY . /app
