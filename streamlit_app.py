@@ -1,6 +1,7 @@
 import streamlit as st
 import torch
 import cv2
+import os
 from segment_anything import sam_model_registry
 
 def main():
@@ -15,6 +16,16 @@ def main():
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     st.write(f"Using device: {device}")
+
+    # Check if the checkpoint file exists
+    checkpoint_path = "./sam_images/sam_vit_l_0b3195.pth"
+    if os.path.exists(checkpoint_path):
+        # Load the SAM model
+        sam = sam_model_registry["vit_l"](checkpoint=checkpoint_path)
+        sam.to(device=device)
+        st.write("SAM model loaded successfully.")
+    else:
+        st.write(f"Checkpoint file not found at {checkpoint_path}. Please ensure the file exists.")
     
     # Load the SAM model
     sam = sam_model_registry["vit_l"](checkpoint="./sam_images/sam_vit_l_0b3195.pth")
