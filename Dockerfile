@@ -9,11 +9,6 @@ COPY requirements.txt /app/requirements.txt
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
-# Install packages in linux
-RUN apt-get update && apt-get install -y \
-    apt install python3-opencv -y \
-    apt install ffmpeg -y \
-    apt install chromium -y \
 
 # Copy the rest of the application code into the container
 COPY . /app
