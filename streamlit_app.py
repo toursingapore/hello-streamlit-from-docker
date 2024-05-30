@@ -10,5 +10,8 @@ def main():
     if st.button("Greet"):
         st.write(f"Hello, {name}! Nice to meet you!")
 
+    import cv2
+    st.write(cv2.__version__)
+
 if __name__ == "__main__":
     main()
